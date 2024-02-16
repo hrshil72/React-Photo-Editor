@@ -78,12 +78,18 @@ const filters = [
 ];
 
 const App = () => {
+  let [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
   let [option, setOptions] = useState(filters);
+  const selectedOption = option[selectedOptionIndex];
 
   return (
     <div className="container">
       <Image />
-      <Sidebar option={option} />
+      <Sidebar
+        option={option}
+        active={selectedOptionIndex}
+        selected={setSelectedOptionIndex}
+      />
       <Slider />
     </div>
   );

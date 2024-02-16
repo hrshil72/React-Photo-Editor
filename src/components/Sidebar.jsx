@@ -1,11 +1,14 @@
 import React from "react";
 
-const Sidebar = ({ option }) => {
+const Sidebar = ({ option, active, selected }) => {
   return (
     <div className="sidebar">
       {option.map((option, index) => {
         return (
-          <button key={index} className="sidebar-item">
+          <button
+            key={index}
+            onClick={() => selected(index)}
+            className={`sidebar-item ${index === active ? "active" : ""}`}>
             {option.name}
           </button>
         );
