@@ -1,10 +1,15 @@
 import React from "react";
 
-const Sidebar = () => {
+const Sidebar = ({ option }) => {
   return (
     <div className="sidebar">
-      <button className="sidebar-item">Brightness</button>
-      <button className="sidebar-item">Contrast</button>
+      {option.map((option, index) => {
+        return (
+          <button key={index} className="sidebar-item">
+            {option.name}
+          </button>
+        );
+      })}
     </div>
   );
 };
