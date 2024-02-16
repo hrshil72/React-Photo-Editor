@@ -1,9 +1,7 @@
 import React from "react";
 
-const Image = () => {
-  return (
-    <div className="img"></div>
-  );
+const Image = ({ style }) => {
+  return <div className="img" style={style}></div>;
 };
 
 export default Image;

@@ -26,7 +26,7 @@ const filters = [
   },
   {
     name: "Saturation",
-    property: "saturation",
+    property: "saturate",
     value: 100,
     range: {
       min: 0,
@@ -82,15 +82,39 @@ const App = () => {
   let [option, setOptions] = useState(filters);
   const selectedOption = option[selectedOptionIndex];
 
+  const handleSliderChange = ({ target }) => {
+    setOptions((prevOptions) => {
+      return prevOptions.map((option, index) => {
+        if (index !== selectedOptionIndex) {
+          return option;
+        }
+        return { ...option, value: target.value };
+      });
+    });
+  };
+
+  const getImageStyle = () => {
+    const filters = option.map((option) => {
+      return `${option.property}(${option.value}${option.unit})`;
+    });
+
+    return { filter: filters.join(" ") };
+  };
+
   return (
     <div className="container">
-      <Image />
+      <Image style={getImageStyle()} />
       <Sidebar
         option={option}
         active={selectedOptionIndex}
         selected={setSelectedOptionIndex}
       />
-      <Slider />
+      <Slider
+        min={selectedOption.range.min}
+        max={selectedOption.range.max}
+        value={selectedOption.value}
+        handleChange={handleSliderChange}
+      />
     </div>
   );
 };
